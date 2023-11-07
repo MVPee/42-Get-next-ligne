@@ -6,7 +6,7 @@
 /*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:39:34 by mvpee             #+#    #+#             */
-/*   Updated: 2023/11/06 17:27:20 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:39:00 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
 	c = (unsigned char)c;
-	i = ft_strlen(s);
-	while (i >= 0)
+	i = -1;
+	while (s[++i])
 	{
 		if (s[i] == c)
-			return ((char *)s + i);
-		i--;
+			return ((char *)&s[i]);
 	}
+	if (c == '\0')
+		return ((char *)&s[i]);
 	return (NULL);
 }
 
