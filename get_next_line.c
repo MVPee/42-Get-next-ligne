@@ -6,7 +6,7 @@
 /*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:39:36 by mvpee             #+#    #+#             */
-/*   Updated: 2023/11/07 15:41:53 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:22:39 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ static char	*extract_line(char *temp, int *start_next)
 	if (temp[i] == '\n')
 		*start_next = i + 1;
 	else
+	{
 		*start_next = i;
-	line = ft_substr(temp, 0, i);
+		if (i == 0 && temp[i] == '\0')
+			return (NULL);
+	}
+		
+	line = ft_substr(temp, 0, *start_next);
 	return (line);
 }
 
@@ -53,6 +58,11 @@ static char	*new_line(int fd, char *buffer, char *temp)
 	while (!ft_strchr(temp, '\n'))
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		if (read_bytes == 0 && temp[0] == '\0')
+		{
+			free(temp);
+			return (NULL);
+		}
 		if (read_bytes <= 0)
 			return (temp);
 		buffer[read_bytes] = '\0';
@@ -78,8 +88,12 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	temp = new_line(fd, buffer, temp);
-	line = extract_line(temp, &start_next);
-	temp = keep_rest(temp, start_next);
 	free(buffer);
+	if (!temp)
+		return (NULL);
+	line = extract_line(temp, &start_next);
+	if (!line && !temp)
+		return (NULL);
+	temp = keep_rest(temp, start_next);
 	return (line);
 }
