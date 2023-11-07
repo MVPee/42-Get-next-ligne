@@ -6,7 +6,7 @@
 /*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:39:36 by mvpee             #+#    #+#             */
-/*   Updated: 2023/11/06 17:32:15 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:41:53 by mvan-pee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*extract_line(char *temp, int *start_next)
 	i = 0;
 	while (temp[i] && temp[i] != '\n')
 		i++;
-	if(temp[i] == '\n')
+	if (temp[i] == '\n')
 		*start_next = i + 1;
 	else
 		*start_next = i;
@@ -50,7 +50,7 @@ static char	*new_line(int fd, char *buffer, char *temp)
 	int		read_bytes;
 	char	*new_temp;
 
-	while (!ft_strrchr(temp, '\n'))
+	while (!ft_strchr(temp, '\n'))
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes <= 0)
@@ -70,11 +70,11 @@ char	*get_next_line(int fd)
 	static char	*temp;
 	int			start_next;
 
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
 	if (temp == NULL)
 		temp = ft_strdup("");
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 2));
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
 	temp = new_line(fd, buffer, temp);
