@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvan-pee <mvan-pee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvpee <mvpee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:39:36 by mvpee             #+#    #+#             */
-/*   Updated: 2023/11/07 16:22:39 by mvan-pee         ###   ########.fr       */
+/*   Updated: 2023/11/09 09:57:23 by mvpee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*keep_rest(char *temp, int start)
 {
@@ -45,7 +44,6 @@ static char	*extract_line(char *temp, int *start_next)
 		if (i == 0 && temp[i] == '\0')
 			return (NULL);
 	}
-		
 	line = ft_substr(temp, 0, *start_next);
 	return (line);
 }
