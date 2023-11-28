@@ -1,5 +1,5 @@
 <h1 align="center">
-	📖 get_next_line
+	💥 get_next_line
 </h1>
 
 <p align="center">
@@ -35,3 +35,5 @@ You can use this tester made by Tripouille
 * [Tripouille/gnlTester](https://github.com/Tripouille/gnlTester)
 
 ![image](https://github.com/MVPee/42-Get-next-line/assets/93082514/ea9b8433-b5e6-4e80-9722-01a14e1870ec)
+
+<i>Don't copy but learn</i>
